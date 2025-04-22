@@ -1,4 +1,3 @@
-# --- NumPy operations ---
 import numpy as np
 
 x = np.array([[1, 2], [3, 4]])
@@ -10,7 +9,6 @@ print("Dot product of vectors v and w:", np.dot(v, w), "\n")
 print("Dot product of matrix x and vector v:", np.dot(x, v), "\n")
 print("Dot product of matrices x and y:\n", np.dot(x, y), "\n")
 
-# --- Pandas DataFrame operations ---
 import pandas as pd
 
 data = {
@@ -23,7 +21,6 @@ df = pd.DataFrame(data)
 sorted_df = df.sort_values(by=['Age', 'Score'])
 print("Sorted DataFrame by Age and Score:\n", sorted_df, "\n")
 
-# --- TensorFlow Matrix Multiplication ---
 import tensorflow as tf
 
 a = tf.constant([[3], [2], [1]], dtype=tf.int32)
@@ -32,7 +29,6 @@ b = tf.constant([[1, 2, 3]], dtype=tf.int32)
 c = tf.matmul(a, b)
 print("TensorFlow matrix multiplication result:\n", c.numpy(), "\n")
 
-# --- Matplotlib Plot ---
 import matplotlib.pyplot as plt
 
 xpoints = np.array([1, 8])
@@ -44,28 +40,19 @@ plt.xlabel("x")
 plt.ylabel("y")
 plt.show()
 
-# --- Scikit-learn Iris Dataset & Decision Tree Classification ---
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 
 iris = load_iris()
-X = iris.data  # features
-y = iris.target  # labels
+X = iris.data
+y = iris.target
 
-# Split the data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Train the model
 model = DecisionTreeClassifier()
 model.fit(X_train, y_train)
 
-# Predict and evaluate
 pred = model.predict(X_test)
 print("Classification Report:\n", classification_report(y_test, pred))
-
-
- model.predict(x_test)
-
-print(classification_report(y test, pred))
