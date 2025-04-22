@@ -1,12 +1,10 @@
 def mcculloch_pitts_or(x1, x2):
-weights = [1, 1]
-threshold = 1
-# Compute weighted sum
-weighted_sum = (x1 * weights[0]) + (x2 * weights[1])
-# Apply threshold function
-return int(weighted_sum >= threshold)
-# Testing OR gate
+    weights = [1, 1]
+    threshold = 1
+    weighted_sum = (x1 * weights[0]) + (x2 * weights[1])
+    return int(weighted_sum >= threshold)
+
 test_cases = [(0, 0), (0, 1), (1, 0), (1, 1)]
 print("OR Gate using McCulloch-Pitts Model:")
 for x1, x2 in test_cases:
-print("Inputs:", (x1, x2), "-> Output:", mcculloch_pitts_or(x1, x2))
+    print("Inputs:", (x1, x2), "-> Output:", mcculloch_pitts_or(x1, x2))
