@@ -1,0 +1,100 @@
+import numpy as np
+
+x= np.array([[1, 2], [3, 4]])
+
+y=np.array([[5, 6], [7, 8]])
+
+v=np.array([9,10])
+
+w= np.array([11, 12])
+
+print(np.dot(v, w), "\n")
+
+print(np.dot(x, v), "\n")
+
+print(np.dot(x, y))
+
+import pandas as pd
+
+'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+
+data
+
+'Age': [25, 30, 35, 40),
+
+'Score': [85, 90, 95, 80]}
+
+df pd.DataFrame (data)
+
+#Sorting by 'Score' in ascending order
+
+sorted_dfdf.sort_values(by=['Age', 'Score'])
+
+print(sorted_df)
+
+import tensorflow as tf
+
+#Define inputs as Tensorflow tensors
+
+atf.constant([[3], [2], [1]], dtype=tf.int32)
+
+btf.constant([[1, 2, 3]], dtype=tf.int32)
+
+#Perform matrix multiplication
+
+c = tf.matmul(a, b)
+
+#Execute the computation in eager execution (default in TensorFlow 2.x)
+
+print(c.numpy())
+
+import matplotlib.pyplot as plt
+
+import numpy as np
+
+xpoints ypoints np.array([1,81) np.array(1, 101)
+
+plt.plot(xpoints, ypoints)
+
+plt.show()
+
+from sklearn.datasets import load_iris
+
+iris load_iris()
+
+X iris.data
+
+y iris.target
+
+from sklearn.model_selection import train test_split
+
+X train, X test, y train, y test train_test_split( X, y, test size 6.3, random state 1 )
+
+print(X_train.shape) print(X_test.shape)
+
+print(y_train.shape) print(y_test.shape)
+
+from sklearn.datasets import load iris
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import classification report
+
+froe sklearn tree import DecisionTreeClassifier
+
+data= load_iris() 
+X =data.data a features
+
+y =data.target labels
+
+Split the data into training and testing sets
+
+train, x test, y train, y test train_test split(X, y, test size-0.3, random_state-42)
+
+model= DecisionTreeClassifier()
+
+model.fit(x train, y train)
+
+ model.predict(x_test)
+
+print(classification_report(y test, pred))

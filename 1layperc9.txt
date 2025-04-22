@@ -1,0 +1,33 @@
+import numpy as np
+# Step function (Activation function)
+def step_function(x):
+if x >= 0 :
+return 1
+else :
+return 0
+# Perceptron learning algorithm
+def perceptron_learning(X, y, lr=0.1, epochs=10):
+weights = np.zeros(X.shape[1]) # Initialize weights as 0
+bias = 0 # Bias term
+print("Epoch | Weights | Bias")
+print("----------------------")
+for epoch in range(epochs):
+for i in range(len(X)):
+weighted_sum = np.dot(X[i], weights) + bias
+y_pred = step_function(weighted_sum)
+# Weight update rule
+error = y[i] - y_pred
+weights += lr * error * X[i]
+bias += lr * error # Update bias
+# Print weights and bias after each epoch
+print(f"{epoch+1:<4} | {weights} | {bias}")
+return weights, bias
+# Training data for OR gate
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]]) # Inputs
+y = np.array([0, 1, 1, 1]) # OR gate output
+# Train perceptron
+weights, bias = perceptron_learning(X, y)
+# Test perceptron
+print("\nTesting Perceptron on OR Gate:")
+for x in X:
+output = step_function(np.dot(x, weights) + bias)

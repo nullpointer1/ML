@@ -1,0 +1,56 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+titanic_data = pd.read_csv('/home/computer/Downloads/train.csv')
+
+titanic_data.shape
+
+titanic_data.isnull().sum()
+
+titanic_data=titanic_data.drop(columns='Cabin',axis=1)
+
+print(titanic_data['Embarked'].mode())
+
+print(titanic_data['Embarked'].mode()[0])
+
+titanic_data['Embarked'].fillna(titanic_data['Embarked'].mode()[0],inplace=Tr
+
+titanic_data.isnull().sum()
+
+titanic_data.describe()
+
+titanic_data['Survived'].value_counts()
+
+sns.set()
+
+sns.countplot('Survived',data=titanic_data)
+
+sns.countplot('Pclass',data=titanic_data)
+
+titanic_data.replace({'Sex':{'male':0,'female':1},'Embarked':{'S':0,'C':1,'Q'
+
+X=titanic_data.drop(columns=['PassengerId','Name','Ticket','Survived'],axis=1
+Y=titanic_data['Survived']
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state
+
+from sklearn.linear_model import LogisticRegression
+model=LogisticRegression()
+
+model.fit(X_train,Y_train)
+
+train_prediction=model.predict(X_train)
+
+Test_prediction=model.predict(X_test)
+
+from sklearn.metrics import accuracy_score
+training_data_accuracy=accuracy_score(Y_train,train_prediction)
+
+training_data_accuracy
+
+testing_data_accuracy=accuracy_score(Y_test,Test_prediction)
+
+test
