@@ -2,54 +2,40 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
 
 titanic_data = pd.read_csv('/home/computer/Downloads/train.csv')
 
-titanic_data.shape
+titanic_data = titanic_data.drop(columns='Cabin', axis=1)
 
-titanic_data.isnull().sum()
+titanic_data['Embarked'].fillna(titanic_data['Embarked'].mode()[0], inplace=True)
 
-titanic_data=titanic_data.drop(columns='Cabin',axis=1)
-
-print(titanic_data['Embarked'].mode())
-
-print(titanic_data['Embarked'].mode()[0])
-
-titanic_data['Embarked'].fillna(titanic_data['Embarked'].mode()[0],inplace=Tr
-
-titanic_data.isnull().sum()
-
-titanic_data.describe()
-
-titanic_data['Survived'].value_counts()
+titanic_data.replace({'Sex': {'male': 0, 'female': 1}, 'Embarked': {'S': 0, 'C': 1, 'Q': 2}}, inplace=True)
 
 sns.set()
+plt.figure(figsize=(6, 4))
+sns.countplot(x='Survived', data=titanic_data)
+plt.figure(figsize=(6, 4))
+sns.countplot(x='Pclass', data=titanic_data)
 
-sns.countplot('Survived',data=titanic_data)
+X = titanic_data.drop(columns=['PassengerId', 'Name', 'Ticket', 'Survived'], axis=1)
+Y = titanic_data['Survived']
 
-sns.countplot('Pclass',data=titanic_data)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=2)
 
-titanic_data.replace({'Sex':{'male':0,'female':1},'Embarked':{'S':0,'C':1,'Q'
+model = LogisticRegression()
+model.fit(X_train, Y_train)
 
-X=titanic_data.drop(columns=['PassengerId','Name','Ticket','Survived'],axis=1
-Y=titanic_data['Survived']
+train_prediction = model.predict(X_train)
+test_prediction = model.predict(X_test)
 
-from sklearn.model_selection import train_test_split
-X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state
+training_data_accuracy = accuracy_score(Y_train, train_prediction)
+testing_data_accuracy = accuracy_score(Y_test, test_prediction)
 
-from sklearn.linear_model import LogisticRegression
-model=LogisticRegression()
-
-model.fit(X_train,Y_train)
-
-train_prediction=model.predict(X_train)
-
-Test_prediction=model.predict(X_test)
-
-from sklearn.metrics import accuracy_score
-training_data_accuracy=accuracy_score(Y_train,train_prediction)
-
-training_data_accuracy
+print("Training Accuracy:", training_data_accuracy)
+print("Testing Accuracy:", testing_data_accuracy)
 
 testing_data_accuracy=accuracy_score(Y_test,Test_prediction)
 
