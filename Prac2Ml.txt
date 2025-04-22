@@ -1,99 +1,70 @@
+# --- NumPy operations ---
 import numpy as np
 
-x= np.array([[1, 2], [3, 4]])
+x = np.array([[1, 2], [3, 4]])
+y = np.array([[5, 6], [7, 8]])
+v = np.array([9, 10])
+w = np.array([11, 12])
 
-y=np.array([[5, 6], [7, 8]])
+print("Dot product of vectors v and w:", np.dot(v, w), "\n")
+print("Dot product of matrix x and vector v:", np.dot(x, v), "\n")
+print("Dot product of matrices x and y:\n", np.dot(x, y), "\n")
 
-v=np.array([9,10])
-
-w= np.array([11, 12])
-
-print(np.dot(v, w), "\n")
-
-print(np.dot(x, v), "\n")
-
-print(np.dot(x, y))
-
+# --- Pandas DataFrame operations ---
 import pandas as pd
 
-'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+    'Age': [25, 30, 35, 40],
+    'Score': [85, 90, 95, 80]
+}
 
-data
+df = pd.DataFrame(data)
+sorted_df = df.sort_values(by=['Age', 'Score'])
+print("Sorted DataFrame by Age and Score:\n", sorted_df, "\n")
 
-'Age': [25, 30, 35, 40),
-
-'Score': [85, 90, 95, 80]}
-
-df pd.DataFrame (data)
-
-#Sorting by 'Score' in ascending order
-
-sorted_dfdf.sort_values(by=['Age', 'Score'])
-
-print(sorted_df)
-
+# --- TensorFlow Matrix Multiplication ---
 import tensorflow as tf
 
-#Define inputs as Tensorflow tensors
-
-atf.constant([[3], [2], [1]], dtype=tf.int32)
-
-btf.constant([[1, 2, 3]], dtype=tf.int32)
-
-#Perform matrix multiplication
+a = tf.constant([[3], [2], [1]], dtype=tf.int32)
+b = tf.constant([[1, 2, 3]], dtype=tf.int32)
 
 c = tf.matmul(a, b)
+print("TensorFlow matrix multiplication result:\n", c.numpy(), "\n")
 
-#Execute the computation in eager execution (default in TensorFlow 2.x)
-
-print(c.numpy())
-
+# --- Matplotlib Plot ---
 import matplotlib.pyplot as plt
 
-import numpy as np
-
-xpoints ypoints np.array([1,81) np.array(1, 101)
+xpoints = np.array([1, 8])
+ypoints = np.array([1, 10])
 
 plt.plot(xpoints, ypoints)
-
+plt.title("Simple Line Plot")
+plt.xlabel("x")
+plt.ylabel("y")
 plt.show()
 
+# --- Scikit-learn Iris Dataset & Decision Tree Classification ---
 from sklearn.datasets import load_iris
-
-iris load_iris()
-
-X iris.data
-
-y iris.target
-
-from sklearn.model_selection import train test_split
-
-X train, X test, y train, y test train_test_split( X, y, test size 6.3, random state 1 )
-
-print(X_train.shape) print(X_test.shape)
-
-print(y_train.shape) print(y_test.shape)
-
-from sklearn.datasets import load iris
-
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import classification_report
 
-from sklearn.metrics import classification report
+iris = load_iris()
+X = iris.data  # features
+y = iris.target  # labels
 
-froe sklearn tree import DecisionTreeClassifier
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-data= load_iris() 
-X =data.data a features
+# Train the model
+model = DecisionTreeClassifier()
+model.fit(X_train, y_train)
 
-y =data.target labels
+# Predict and evaluate
+pred = model.predict(X_test)
+print("Classification Report:\n", classification_report(y_test, pred))
 
-Split the data into training and testing sets
-
-train, x test, y train, y test train_test split(X, y, test size-0.3, random_state-42)
-
-model= DecisionTreeClassifier()
-
-model.fit(x train, y train)
 
  model.predict(x_test)
 
