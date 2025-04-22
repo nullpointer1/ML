@@ -1,70 +1,35 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
-# Generate some example data (1D points)
+
 np.random.seed(42)
 data = np.array([1.2, 1.5, 2.1, 2.8, 3.5, 5.0, 5.5, 6.2, 6.8, 7.1])
-# Initialize parameters (randomly)
-mu1, mu2 = 2.0, 6.0 # Initial means for 2 clusters
-sigma1, sigma2 = 1.0, 1.0 # Initial standard deviations
-pi1, pi2 = 0.5, 0.5 # Initial probabilities of clusters
+
+mu1, mu2 = 2.0, 6.0
+sigma1, sigma2 = 1.0, 1.0
+pi1, pi2 = 0.5, 0.5
+
 def gaussian(x, mean, sigma):
-""" Compute Gaussian probability density function """
-return norm.pdf(x, mean, sigma)
-# EM Algorithm
+    return norm.pdf(x, mean, sigma)
+
 iterations = 10
 for _ in range(iterations):
-# E-Step: Compute responsibilities
-r1 = pi1 * gaussian(data, mu1, sigma1)
-r2 = pi2 * gaussian(data, mu2, sigma2)
-total = r1 + r2
-r1 /= total
-r2 /= total
-# M-Step: Update parameters
-mu1 = np.sum(r1 * data) / np.sum(r1)
-mu2 = np.sum(r2 * data) / np.sum(r2)
-sigma1 = np.sqrt(np.sum(r1 * (data - mu1) ** 2) / np.sum(r1))
-sigma2 = np.sqrt(np.sum(r2 * (data - mu2) ** 2) / np.sum(r2))
-pi1 = np.mean(r1)
-pi2 = np.mean(r2)
-# Plot histogram
+    r1 = pi1 * gaussian(data, mu1, sigma1)
+    r2 = pi2 * gaussian(data, mu2, sigma2)
+    total = r1 + r2
+    r1 /= total
+    r2 /= total
+
+    mu1 = np.sum(r1 * data) / np.sum(r1)
+    mu2 = np.sum(r2 * data) / np.sum(r2)
+    sigma1 = np.sqrt(np.sum(r1 * (data - mu1) ** 2) / np.sum(r1))
+    sigma2 = np.sqrt(np.sum(r2 * (data - mu2) ** 2) / np.sum(r2))
+    pi1 = np.mean(r1)
+    pi2 = np.mean(r2)
+
 x_vals = np.linspace(min(data) - 1, max(data) + 1, 1000)
 gmm_pdf = pi1 * gaussian(x_vals, mu1, sigma1) + pi2 * gaussian(x_vals, mu2, sigma2)
 plt.hist(data, bins=5, density=True, alpha=0.5, color="blue", label="Data Histogram")
 plt.plot(x_vals, gmm_pdf, label="Estimated GMM", color="red", linewidth=2)
 plt.xlabel("Data Values")
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.stats import norm
-# Generate some example data (1D points)
-np.random.seed(42)
-data = np.array([1.2, 1.5, 2.1, 2.8, 3.5, 5.0, 5.5, 6.2, 6.8, 7.1])
-# Initialize parameters (randomly)
-mu1, mu2 = 2.0, 6.0 # Initial means for 2 clusters
-sigma1, sigma2 = 1.0, 1.0 # Initial standard deviations
-pi1, pi2 = 0.5, 0.5 # Initial probabilities of clusters
-def gaussian(x, mean, sigma):
-""" Compute Gaussian probability density function """
-return norm.pdf(x, mean, sigma)
-# EM Algorithm
-iterations = 10
-for _ in range(iterations):
-# E-Step: Compute responsibilities
-r1 = pi1 * gaussian(data, mu1, sigma1)
-r2 = pi2 * gaussian(data, mu2, sigma2)
-total = r1 + r2
-r1 /= total
-r2 /= total
-# M-Step: Update parameters
-mu1 = np.sum(r1 * data) / np.sum(r1)
-mu2 = np.sum(r2 * data) / np.sum(r2)
-sigma1 = np.sqrt(np.sum(r1 * (data - mu1) ** 2) / np.sum(r1))
-sigma2 = np.sqrt(np.sum(r2 * (data - mu2) ** 2) / np.sum(r2))
-pi1 = np.mean(r1)
-pi2 = np.mean(r2)
-# Plot histogram
-x_vals = np.linspace(min(data) - 1, max(data) + 1, 1000)
-gmm_pdf = pi1 * gaussian(x_vals, mu1, sigma1) + pi2 * gaussian(x_vals, mu2, sigma2)
-plt.hist(data, bins=5, density=True, alpha=0.5, color="blue", label="Data Histogram")
-plt.plot(x_vals, gmm_pdf, label="Estimated GMM", color="red", linewidth=2)
-plt.xlabel("Data Values")
+plt.show()
